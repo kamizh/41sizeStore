@@ -6,9 +6,76 @@
       xmlns:local="clr-namespace:Zaripov41project"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ProductPage">
+      Title="ProductPage" FontFamily="Comic Sans MS">
 
     <Grid>
-        <Button Click="Button_Click" Content="go" Height="30" Width="175"></Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <WrapPanel Margin="20" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="left">
+            <StackPanel Orientation="Vertical" >
+                <TextBlock Text="" Name="FIOClient" FontSize="14" FontWeight="Black" HorizontalAlignment="Left"></TextBlock>
+                <TextBlock Name="Role" Text="Роль: Гость" FontSize="14" FontWeight="Black" HorizontalAlignment="Left" ></TextBlock>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Name="TextOne" FontSize="14"></TextBlock>
+                </StackPanel>
+                <TextBox HorizontalAlignment="Right" Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged" Width="250" FontSize="14"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="20"  Orientation="Vertical">
+                <RadioButton Name="RDown" Content="По возрастанию стоимости" GroupName="Sort" Width="210" FontSize="14" Checked="RadioButton_Checked"></RadioButton>
+                <RadioButton Name="RUp" Content="По убыванию стоимости" GroupName="Sort" Width="210" FontSize="14" Checked="RadioButton_Checked_1"></RadioButton>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox Name="Combotype" SelectionChanged="Combotype_SelectionChanged" FontSize="15" Width="200" Height="25" >
+                    <TextBlock>Все</TextBlock>
+                    <TextBlock>0 - 9,99%</TextBlock>
+                    <TextBlock>10 - 14,99%</TextBlock>
+                    <TextBlock>15% и более</TextBlock>
+                </ComboBox>
+            </StackPanel>
+        </WrapPanel>
+        <ListView Grid.Row="2" Name="ProductListView" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="500"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Grid.RowSpan="4">
+                            <Image.Source>
+                                <Binding Path="ProductPhoto" >
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>
+                                            res/picture.png
+                                        </ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+                        <TextBlock Text="{Binding ProductName}" FontSize="16" FontWeight="Black" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1"></TextBlock>
+                        <TextBlock Text="{Binding ProductDescription}" FontSize="14" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1"></TextBlock>
+                        <TextBlock Text="{Binding ProductManufacturer, StringFormat= производитель: {0}}" FontSize="14" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"></TextBlock>
+                        <TextBlock Text="{Binding ProductCost, StringFormat=Цена: {0} руб}" FontSize="14" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1"></TextBlock>
+                        <TextBlock Text="Скидка" Grid.Row="0" Grid.Column="2" FontSize="20"></TextBlock>
+                        <WrapPanel Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Right">
+                            <TextBlock Text="{Binding ProductDiscountAmount}" FontSize="30" ></TextBlock>
+                            <TextBlock Text="%" FontSize="30"  ></TextBlock>
+                        </WrapPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Page>
