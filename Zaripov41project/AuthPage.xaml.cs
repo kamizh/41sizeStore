@@ -36,7 +36,8 @@ namespace Zaripov41project
                 MessageBox.Show("Все поля должны быть заполнены!");
                 return ;
             }
-            User user = Zaripov41Entities.GetContext().User.ToList().Find(p => p.UserLogin == login && p.UserPassword == password);
+            var ss = Zaripov41Entities.GetContext();
+           var user = ss.User.ToList().Find(p => p.UserLogin == login && p.UserPassword == password);
             
             if (user == null)
             {

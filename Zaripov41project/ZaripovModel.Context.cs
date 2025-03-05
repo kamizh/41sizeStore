@@ -15,18 +15,21 @@ namespace Zaripov41project
     
     public partial class Zaripov41Entities : DbContext
     {
-        private static Zaripov41Entities _context;
-        public static Zaripov41Entities GetContext()
-        {
-            if(_context == null )
-                _context = new Zaripov41Entities();
-            return _context;
-        }
         public Zaripov41Entities()
             : base("name=Zaripov41Entities")
         {
         }
-    
+
+
+        private static Zaripov41Entities _context;
+
+        public static Zaripov41Entities GetContext()
+        {
+            if (_context == null)
+                _context = new Zaripov41Entities();
+            return _context;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

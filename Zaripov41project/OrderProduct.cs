@@ -18,6 +18,7 @@ namespace Zaripov41project
         public string ProductArticleNumber { get; set; }
         public int ProductCount { get; set; }
     
+        public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
     }
 }

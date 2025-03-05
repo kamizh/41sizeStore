@@ -13,6 +13,7 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="37"></RowDefinition>
         </Grid.RowDefinitions>
         <WrapPanel Margin="20" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="left">
             <StackPanel Orientation="Vertical" >
@@ -37,7 +38,12 @@
                 </ComboBox>
             </StackPanel>
         </WrapPanel>
-        <ListView Grid.Row="2" Name="ProductListView" >
+        <ListView Grid.Row="2" Name="ProductListView" SelectionChanged="ProductListView_SelectionChanged" >
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить к заказу" Name="AddOrderButton" Click="AddOrderButton_Click"></MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -76,6 +82,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Visibility="Hidden" Name="BasketButton"  Click="BasketButton_Click" Grid.Column="2" Grid.Row="4" Content="Корзина"></Button>
 
     </Grid>
 </Page>

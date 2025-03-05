@@ -19,7 +19,9 @@ namespace Zaripov41project
         {
             this.OrderProduct = new HashSet<OrderProduct>();
         }
-    
+
+        public int Count { get; set; } = 1;
+
         public string ProductArticleNumber { get; set; }
         public string ProductName { get; set; }
         public string ProductUnit { get; set; }

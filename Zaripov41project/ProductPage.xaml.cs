@@ -20,6 +20,10 @@ namespace Zaripov41project
 	/// </summary>
 	public partial class ProductPage : Page
 	{
+
+
+        List<Product> selectedProduct = new List<Product>();
+        private User client = null;
 		public ProductPage()
 		{
 			InitializeComponent();
@@ -36,7 +40,7 @@ namespace Zaripov41project
 
             Role.Text = user.UserRole == 1 ? "Роль: Клиент" : user.UserRole == 2 ? "Роль: Менеджер" : "Роль: Администратор";
 
-
+            client = user;
             var currentProduct = Zaripov41Entities.GetContext().Product.ToList();
             ProductListView.ItemsSource = currentProduct;
             Combotype.SelectedIndex = 0;
@@ -90,6 +94,34 @@ namespace Zaripov41project
         private void Combotype_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 			UpdateProducts();
+        }
+
+        private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void AddOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            var currentChoiceProduct = ProductListView.SelectedItems.Cast<Product>().ToList();
+            for (int i = 0;i < currentChoiceProduct.Count;i++)
+            {
+                selectedProduct.Add(currentChoiceProduct[i]);
+            }
+            BasketButton.Visibility = Visibility.Visible;
+
+        }
+
+        private void BasketButton_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            OrderWindow orderWindow = new OrderWindow(client, selectedProduct);
+
+            orderWindow.Show();
+            selectedProduct = new List<Product>();
+            BasketButton.Visibility = Visibility.Hidden;
+
         }
     }
 }
